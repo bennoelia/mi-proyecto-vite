@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  // Definir los tipos de estado como `string` usando TypeScript
+  const [abonado, setAbonado] = useState<string>('');
+  const [codigoBanco, setCodigoBanco] = useState<string>('');
+  const [claveMac, setClaveMac] = useState<string>('');
+
+  // Tipar la función de manejo del formulario
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Aquí puedes manejar la lógica de la solicitud para dar de alta la clave MAC
+    console.log('Abonado:', abonado);
+    console.log('Código Banco:', codigoBanco);
+    console.log('Clave MAC:', claveMac);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1>Alta de clave MAC</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="abonado">Abonado:</label>
+          <input
+            type="text"
+            id="abonado"
+            value={abonado}
+            onChange={(e) => setAbonado(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="codigoBanco">Código Banco:</label>
+          <input
+            type="text"
+            id="codigoBanco"
+            value={codigoBanco}
+            onChange={(e) => setCodigoBanco(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="claveMac">Clave MAC:</label>
+          <input
+            type="password"
+            id="claveMac"
+            value={claveMac}
+            onChange={(e) => setClaveMac(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Dar de Alta</button>
+      </form>
+    </div>
+  );
 }
 
-export default App
+export default App;
